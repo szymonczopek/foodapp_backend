@@ -5,6 +5,7 @@ const jwt= require('jsonwebtoken')
 
 
     async function register (req, res){
+        console.log('register')
         const user= User.find({login: req.body.login})
         if((await user).length >=1 ){
             return res.json({message :"login already used"})
