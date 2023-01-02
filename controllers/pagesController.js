@@ -1,7 +1,10 @@
-exports.register= (req, res) => {
-    res.send('Hello register!')
-  }
+const express= require('express')
+const router= express.Router()
 
-  exports.login= (req, res) => {
-    res.send('Hello login!')
-  }
+
+const {register, login}= require('../controllers/authController')
+
+router.post('/register',register)
+router.post('/login',login)
+
+module.exports=router

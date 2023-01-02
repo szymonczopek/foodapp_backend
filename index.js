@@ -1,11 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 const PORT = 8000
-
 const app = express()
 
-const pagesController = require('./controllers/pagesController')
-
+const authRouter = require('./controllers/pagesController')
+const verifyUserMiddleware=require('./middleware/verifyUser')
 
 //Middlewares
 app.use(cors())
@@ -16,6 +15,7 @@ app.listen(PORT,() => console.log('Server is running'))
 
 
 
-
-app.get('/register', pagesController.register)
-app.get('/login', pagesController.login)
+app.use('/', (req, res) => {
+    res.send('Hello, Wwwwworld!');
+  })
+app.post('auth',authRouter)
