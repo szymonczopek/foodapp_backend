@@ -5,12 +5,11 @@ const jwt= require('jsonwebtoken')
 
 
     async function register (req, res){
-        console.log('register')
         const user= User.find({login: req.body.login})
         if((await user).length >=1 ){
-            return res.json({message :"login already used"})
+            return res.json({message : "login already used"})
             } else {
-                bcrypt.hash(req.body.password, 10, async(error,hash)=>{
+                bcrypt.hash(req.body.password, 10, async(error, hash)=>{
                     if(error){
                         return res.json({message: "error in password"});
                     } else {
@@ -29,24 +28,27 @@ const jwt= require('jsonwebtoken')
     }
 
     async function login(req, res) {
-        const user= await User.find({login: req.body.login});
+        const {login, password} = req.body
+        const user= await User.find({login});
         if(user.length < 1){
-            return res.json({message : "login not exist"});
+            return res.json({message : "user not exist"});
         } else {
-            bcrypt.compare(req.body.password, user[0].password, async (error,result))
+            bcrypt.compare(password, user.password, async (error, result)=>{
                 if(error) {
+                    console.log(error)
                     return res.json({message: "password not exist"});
                 } 
                 if(result){
-                   const token=jwt.sign({login: user[0].login, password: user[0].password})
+                   const token=jwt.sign({login: user.login, password: user.password})
                    return res.json({
                     message: "user logged in",
-                    login: user[0].login,
+                    login: user.login,
                     token: token
                    })
                 }
-            }
+            })
         }
+    }
     
 module.exports= ({
     register,

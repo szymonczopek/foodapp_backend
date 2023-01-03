@@ -5,7 +5,7 @@ const dotenv = require('dotenv').config()
 const PORT = 8000
 const app = express()
 
-//const authRouter = require('./controllers/pagesController')
+
 //const verifyUserMiddleware=require('./middleware/verifyUser')
 const connectDB = require('./config/db')
 
@@ -25,8 +25,3 @@ app.use('/api/user',require('./routes/userRoutes'))
 app.listen(PORT,() => console.log('Server is running'))
 
 
-
-/*app.use('/', (req, res) => {
-    res.send('Hello, Wwwwworld!');
-  })
-app.post('auth',authRouter)*/
