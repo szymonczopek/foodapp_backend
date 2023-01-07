@@ -18,7 +18,8 @@ const roomSchema = mongoose.Schema({
         ref: 'Order'
     }],
     description: {
-        type: String
+        type: String,
+        default: ""
     }
 })
 

@@ -6,7 +6,7 @@ const PORT = 8000
 const app = express()
 
 
-//const verifyUserMiddleware=require('./middleware/verifyUser')
+
 const connectDB = require('./config/db')
 
 //Connect to DB
