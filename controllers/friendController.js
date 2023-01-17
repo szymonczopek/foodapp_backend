@@ -4,10 +4,10 @@ const getAll = async(req,res) => {
     const id = req.userData.id
     try{
         const friends = await User.findOne({_id: id}, 'friends -_id').populate('friends')
-        res.statsu(200).json({message: 'Success',data:friends})
+        res.status(200).json({message: 'Success',data:friends})
     } catch(err){
         console.log(err)
-        res.statsu(500).json({message: 'Problem with fetching data'})
+        res.status(500).json({message: 'Problem with fetching data'})
     }
 }
 
@@ -41,6 +41,9 @@ const acceptInvitation = async(req,res) => {
             //there are no active invitation
             res.status(400).json({message: 'There are no active invitation'})
         }
+    } catch(err){
+        console.log(err)
+        res.statsu(500).json({message: 'Problem with invitation accept'})
     }
 }
 
