@@ -21,6 +21,8 @@ app.use(express.urlencoded({extended:false}))
 
 //Routes
 app.use('/api/user',require('./routes/userRoutes'))
+app.use('/api/room',require('./routes/roomRoutes'))
+app.use('/api/friend',require('./routes/friendRoutes'))
 
 app.listen(PORT,() => console.log('Server is running'))
 
