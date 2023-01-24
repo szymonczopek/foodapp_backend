@@ -49,5 +49,6 @@ const acceptInvitation = async(req,res) => {
 
 module.exports = {
     getAll,
-    inviteFriend
+    inviteFriend,
+    acceptInvitation
 }
