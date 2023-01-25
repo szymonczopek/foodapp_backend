@@ -14,7 +14,8 @@ const getAll = async(req,res) => {
 
 const inviteFriend = async(req,res) => {
     const id = req.userData.id
-    const receiverId = req.receiver
+    const receiverId = req.body.receiver
+    console.log(receiverId)
     try{
         //check if user has been invited
         const sendedInvitation = await Notification.findOne({type: 'Invite', sender: id, receiver: receiverId, status: "Pending"})

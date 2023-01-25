@@ -6,7 +6,7 @@ const router= express.Router()
 
 
 
-router.get('/friends', verifyUser, getAll)
+router.get('/getFriends', verifyUser, getAll)
 router.post('/inviteFriend', verifyUser, inviteFriend)
 router.post('/acceptInvitation', verifyUser, acceptInvitation)
 

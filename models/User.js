@@ -9,6 +9,14 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    img: {
+        type: String,
+        default: 'profile2'
+    },
+    number: {
+        type: 'String',
+        default: 'Not given'
+    },
     rooms: [{
         type: mongoose.Types.ObjectId,
         ref: 'Room'
@@ -18,8 +26,15 @@ const userSchema = mongoose.Schema({
         require: true
     },
     friends: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            require: true
+        },
+        balance: {
+            type: Number,
+            default: 0
+        }
     }]
 
 })
