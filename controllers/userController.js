@@ -14,7 +14,6 @@ const getSelectedUsers = async (req,res) => {
 }
 
 const getAll = async(req,res) => {
-    const id = req.userData.id
     try{
         const users = await User.find()
         res.status(200).json({message: 'Success',data: users})
