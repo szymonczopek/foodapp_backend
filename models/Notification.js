@@ -21,6 +21,10 @@ const notificationSchema = mongoose.Schema({
         enum: ['Accepted','Refused','Pending'],
         default: 'Pending'
     },
+    seen: {
+        type: Boolean,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now

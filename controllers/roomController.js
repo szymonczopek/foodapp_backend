@@ -14,7 +14,7 @@ async function createRoom(req, res){
         owner: user._id,
         members: members
     }).save();
-    res.json({
+    res.status(200).json({
         message: "Success",
         
     })
@@ -28,7 +28,7 @@ const getAll = async(req,res) => {
         res.status(200).json({message: 'Success',data:rooms})
     } catch(err){
         console.log(err)
-        res.statsu(500).json({message: 'Problem with fetching data'})
+        res.status(500).json({message: 'Problem with fetching data'})
     }
 }
 const deleteRoom = async(req,res) => {
@@ -38,7 +38,7 @@ const deleteRoom = async(req,res) => {
         res.status(200).json({message: 'Success'})
     } catch(err){
         console.log(err)
-        res.statsu(500).json({message: 'Problem with fetching data'})
+        res.status(500).json({message: 'Problem with fetching data'})
     }
 }
 

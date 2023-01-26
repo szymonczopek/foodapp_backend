@@ -18,7 +18,7 @@ const inviteFriend = async(req,res) => {
     console.log(receiverId)
     try{
         //check if user has been invited
-        const sendedInvitation = await Notification.findOne({type: 'Invite', sender: id, receiver: receiverId, status: "Pending"})
+        const sendedInvitation = await Notification.findOne({type: 'Invite', sender: id, receiver: receiverId, status: "Pending", seen: false})
         if(sendedInvitation){
             //user invited
             res.status(400).json({message: 'User has been invited before'})
@@ -45,7 +45,7 @@ const acceptInvitation = async(req,res) => {
         if(invitation){
             //accept invitation
             invitation.status='Accepted'
-            const updateInvitation = invita.save()
+            const updateInvitation = invitation.save()
             //add friend
             const userSenderUpdate = User.findOneAndUpdate({_id:senderId},{$push: {friends: id}})
             const userReceiverUpdate = User.findOneAndUpdate({_id:id},{$push: {friends: senderId}})
@@ -62,7 +62,7 @@ const acceptInvitation = async(req,res) => {
         }
     } catch(err){
         console.log(err)
-        res.statsu(500).json({message: 'Problem with invitation accept'})
+        res.status(500).json({message: 'Problem with invitation accept'})
     }
 }
 
