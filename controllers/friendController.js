@@ -45,7 +45,7 @@ const acceptInvitation = async(req,res) => {
         if(invitation){
             //accept invitation
             invitation.status='Accepted'
-            const updateInvitation = invita.save()
+            const updateInvitation = invitation.save()
             //add friend
             const userSenderUpdate = User.findOneAndUpdate({_id:senderId},{$push: {friends: id}})
             const userReceiverUpdate = User.findOneAndUpdate({_id:id},{$push: {friends: senderId}})
