@@ -4,7 +4,7 @@ const Notification = require('../models/Notification')
 const getAll = async(req,res) => {
     const id = req.userData.id
     try{
-        const friends = await User.findOne({_id: id}, 'friends -_id').populate('friends')
+        const friends = await User.findOne({_id: id}, 'friends -_id').populate({path:'friends',populate:{path:'friends',populate: {path:'userId'}}})
         res.status(200).json({message: 'Success',data:friends})
     } catch(err){
         console.log(err)
@@ -38,18 +38,27 @@ const inviteFriend = async(req,res) => {
 
 const acceptInvitation = async(req,res) => {
     const id = req.userData.id
-    const senderId = req.sender
+    const senderId = req.body.sender
     try{
         //check if invitation exists
         const invitation = await Notification.findOne({sender: senderId, receiver: id, type: 'Invite', status: 'Pending'})
+
         if(invitation){
             //accept invitation
             invitation.status='Accepted'
             const updateInvitation = invitation.save()
-            //add friend
-            const userSenderUpdate = User.findOneAndUpdate({_id:senderId},{$push: {friends: id}})
-            const userReceiverUpdate = User.findOneAndUpdate({_id:id},{$push: {friends: senderId}})
 
+            //add friend
+            var userSender = await User.findById(senderId)
+            var userReceiver = await User.findById(id)
+
+            userSender.friends.push(id)
+            const userSenderUpdate = await userSender.save()
+
+            userReceiver.friends.push(senderId)
+            const userReceiverUpdate = await userReceiver.save()
+
+            //check if saved
             if(userSenderUpdate && userReceiverUpdate && updateInvitation){
                 res.status(200).json({message: 'Success'})
             } else{
