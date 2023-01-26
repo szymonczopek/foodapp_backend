@@ -1,15 +1,13 @@
 const express = require('express')
 const {register, login} = require('../controllers/authController')
-const {createRoom} = require('../controllers/roomController')
-const verifyUserMiddleware= require('../middleware/verifyUser')
+const { getSelectedUsers } = require('../controllers/userController')
+const {verifyUser} = require('../middleware/verifyUser')
 
 const router= express.Router()
 
 router.post('/register',register)
 router.post('/login',login)
-
-router.post('/createRoom', verifyUserMiddleware, createRoom)
-
+router.get('/getSelectedUsers/:filter',verifyUser,getSelectedUsers)
 
 
 module.exports=router

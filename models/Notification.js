@@ -20,6 +20,10 @@ const notificationSchema = mongoose.Schema({
         type: String,
         enum: ['Accepted','Refused','Pending'],
         default: 'Pending'
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 

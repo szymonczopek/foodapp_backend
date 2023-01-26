@@ -1,5 +1,6 @@
 const Room = require('../models/Room');
-const User = require('../models/User')
+const User = require('../models/User');
+
 
 async function createRoom(req, res){
     const userData = req.userData
@@ -20,7 +21,7 @@ async function createRoom(req, res){
 
 }
 
-getAll = async(req,res) => {
+const getAll = async(req,res) => {
     const id = req.userData.id
     try{
         const rooms = await User.findOne({_id: id}, 'rooms -_id').populate('rooms')
@@ -30,11 +31,11 @@ getAll = async(req,res) => {
         res.statsu(500).json({message: 'Problem with fetching data'})
     }
 }
-deleteRoom = async(req,res) => {
-    const id = req.body
+const deleteRoom = async(req,res) => {
+    const id = req.body.id
     try{
         await Room.deleteOne({_id: id})
-        res.status(200).json({message: 'Deleted'})
+        res.status(200).json({message: 'Success'})
     } catch(err){
         console.log(err)
         res.statsu(500).json({message: 'Problem with fetching data'})
