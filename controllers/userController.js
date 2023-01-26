@@ -11,8 +11,32 @@ const getSelectedUsers = async (req,res) => {
         console.log(err)
         res.status(500).json({message: 'Problem with fetching data.'})
     }
-} 
+}
+
+const getAll = async(req,res) => {
+    const id = req.userData.id
+    try{
+        const users = await User.find()
+        res.status(200).json({message: 'Success',data: users})
+    } catch(err){
+        console.log(err)
+        res.status(500).json({message: 'Problem with fetching data'})
+    }
+}
+
+const getUserData = async(req,res) => {
+    const id = req.userData.id
+    try{
+        const user = await User.findOne({_id: id})
+        res.status(200).json({message: 'Success',data: user})
+    } catch(err){
+        console.log(err)
+        res.status(500).json({message: 'Problem with fetching data'})
+    }
+}
 
 module.exports = {
-    getSelectedUsers
+    getSelectedUsers,
+    getAll,
+    getUserData
 }
