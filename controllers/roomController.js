@@ -3,22 +3,37 @@ const User = require('../models/User');
 
 
 async function createRoom(req, res){
-    const userData = req.userData
+    const user = req.userData.id
     const {name, description,members} = req.body
-
-    const user= await User.findOne({_id:userData.id});
     
-    const auth= await new Room({
+    const room= await new Room({
         name: name,
         description: description,
-        owner: user._id,
+        owner: user,
         members: members
     }).save();
-    res.status(200).json({
-        message: "Success",
-        
-    })
+    console.log('auth',room)
+    if(room){
+        //add room to use list
 
+        var userData = await User.findById(user)
+        userData.rooms.push(room._id)
+        const updateUser = userData.save()
+
+        if(updateUser)
+            res.status(200).json({
+                message: "Success",
+                data: {
+                    name: room.name,
+                    members: room.members,
+                    _id: room._id
+                }
+            })
+        else
+            res.status(500).json({message: 'Adding room failed'})
+    } else{
+        res.status(500).json({message: 'Creating room failed'})
+    }
 }
 
 const getAll = async(req,res) => {

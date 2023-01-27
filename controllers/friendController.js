@@ -4,7 +4,7 @@ const Notification = require('../models/Notification')
 const getAll = async(req,res) => {
     const id = req.userData.id
     try{
-        const friends = await User.findOne({_id: id}, 'friends -_id').populate({path:'friends',populate:{path:'friends',populate: {path:'userId'}}})
+        const friends = await User.findOne({_id: id}, 'friends -_id').populate('friends.userId','img number login')
         res.status(200).json({message: 'Success',data:friends})
     } catch(err){
         console.log(err)
@@ -52,10 +52,10 @@ const acceptInvitation = async(req,res) => {
             var userSender = await User.findById(senderId)
             var userReceiver = await User.findById(id)
 
-            userSender.friends.push(id)
+            userSender.friends.push({userId:id})
             const userSenderUpdate = await userSender.save()
 
-            userReceiver.friends.push(senderId)
+            userReceiver.friends.push({userId:senderId})
             const userReceiverUpdate = await userReceiver.save()
 
             //check if saved
