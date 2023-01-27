@@ -13,7 +13,16 @@ const orderSchema = mongoose.Schema({
         type: String,
     },
     orderItems: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref: 'orderItem'
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        require: true 
+    },
+    totalCost: {
+        type: number
     }
 })
 
