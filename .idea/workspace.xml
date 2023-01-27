@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2736fa39-8287-4b37-9ae1-08e2da41c4bb" name="Changes" comment="notification">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/userController.js" afterDir="false" />
-    </list>
+    <list default="true" id="2736fa39-8287-4b37-9ae1-08e2da41c4bb" name="Changes" comment="notification" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +51,7 @@
       <workItem from="1674319156869" duration="6000" />
       <workItem from="1674731116716" duration="139000" />
       <workItem from="1674731258261" duration="401000" />
-      <workItem from="1674731788910" duration="2566000" />
+      <workItem from="1674731788910" duration="3239000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1672676204197</created>
