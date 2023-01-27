@@ -4,21 +4,18 @@ const User = require('../models/User');
 
 async function createRoom(req, res){
     const userData = req.userData
-    const {name, description,members} = req.body
+    const {name, description, members} = req.body
 
     const user= await User.findOne({_id:userData.id});
     
-    const auth= await new Room({
+    const newRoom= await new Room({
         name: name,
         description: description,
         owner: user._id,
         members: members
     }).save();
-    res.status(200).json({
-        message: "Success",
-        
-    })
-
+    const updateUser = User.findOneAndUpdate({_id: user._id},{$push: {rooms: newRoom._id}})
+    if(updateUser) res.status(200).json({message: "Success"})
 }
 
 const getAll = async(req,res) => {
