@@ -10,9 +10,8 @@ async function createRoom(req, res){
         name: name,
         description: description,
         owner: user,
-        members: members
+        members: [user,...members]
     }).save();
-    console.log('auth',room)
     if(room){
         //add room to use list
 
@@ -39,7 +38,7 @@ async function createRoom(req, res){
 const getAll = async(req,res) => {
     const id = req.userData.id
     try{
-        const rooms = await User.findOne({_id: id}, 'rooms -_id').populate('rooms')
+        const rooms = await User.findOne({_id: id}, 'rooms -_id').populate('rooms','name members owner')
         res.status(200).json({message: 'Success',data:rooms})
     } catch(err){
         console.log(err)
