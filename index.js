@@ -24,6 +24,7 @@ app.use('/api/user',require('./routes/userRoutes'))
 app.use('/api/room',require('./routes/roomRoutes'))
 app.use('/api/friend',require('./routes/friendRoutes'))
 app.use('/api/notification',require('./routes/notificationRoutes'))
+app.use('/api/order',require('./routes/orderRoutes'))
 
 app.listen(PORT,() => console.log('Server is running'))
 

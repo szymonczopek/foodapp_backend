@@ -6,7 +6,7 @@ const router= express.Router()
 
 
 
-router.get('/createOrder', verifyUser, createOrder)
+router.post('/createOrder', verifyUser, createOrder)
 router.get('/getAllOrdersInRoom/:idRoom', verifyUser, getAllOrdersInRoom)
 router.get('/getAllOrdersForUser/:idRoom', verifyUser, getAllOrdersForUser)
 router.delete('/deleteOrder/:idOrder',verifyUser,deleteOrder)

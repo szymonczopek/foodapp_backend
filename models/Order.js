@@ -12,10 +12,10 @@ const orderSchema = mongoose.Schema({
     description: {
         type: String,
     },
-    orderItems: {
+    orderItems: [{
         type: mongoose.Types.ObjectId,
         ref: 'OrderItem'
-    },
+    }],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',

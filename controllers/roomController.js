@@ -79,7 +79,7 @@ const addMembers = async(req, res) =>{
 const getRoomInfo = async(req, res) =>{
     const idRoom = req.params.idRoom
      try{
-        const room = await Room.findOne({_id: idRoom}).populate('owner','login').populate('members','login img')//.populate('orders') 
+        const room = await Room.findOne({_id: idRoom}).populate('owner','login').populate('members','login img').populate('orders','name owner totalCost orderItems') 
         res.status(200).json({message: 'Success',data:room})
     } catch(err){
         console.log(err)

@@ -12,10 +12,11 @@ async function createOrder(req, res){
         owner: userId    
     }).save();
 
-    var updateRoom = Room.findById(idRoom)
+    var updateRoom = await Room.findById(idRoom)
     updateRoom.orders.push(newOrder._id)
     const saveRoom = updateRoom.save()
-    if(saveRoom) res.status(200).json({ message: "Success"})
+    if(saveRoom) res.status(200).json({ message: "Success", data:newOrder})
+    else res.status(400).json({message:'Creating order failed'})
 }
 
 const getAllOrdersInRoom = async(req,res) => {
@@ -50,9 +51,9 @@ const deleteOrder = async(req,res) => {
         res.status(500).json({message: 'Problem with fetching data'})
     }
 }
-module.exports({
+module.exports={
     createOrder,
     getAllOrdersInRoom,
     getAllOrdersForUser,
     deleteOrder
-})
+}
