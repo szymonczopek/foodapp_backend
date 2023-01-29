@@ -11,12 +11,16 @@ const newOrderItem= await new OrderItem({
         cost: cost,
         amount: amount    
     }).save();
-    const updateOrder = Order.findOneAndUpdate({_id: idOrder},{$push: {orderItems: newOrderItem._id}})
+    
+    var updateOrder = Order.findById(idOrder)
+    updateOrder.orderItems.push(newOrderItem._id)
+    const saveOrder = updateOrder.save()
+    
     if(updateOrder) res.status(200).json({ message: "Success"})
 }
 
 const getAllItemOrdersInOrder = async(req,res) => {
-    const id = req.idOrder
+    const id = req.params.idOrder
     try{
         const orderItems = await OrderItem.find({_id: id}).populate('orderItems')
         res.status(200).json({message: 'Success',data:orders})
