@@ -11,8 +11,11 @@ async function createOrder(req, res){
         description: description,
         owner: userId    
     }).save();
-    const updateRoom = Room.findOneAndUpdate({_id: idRoom},{$push: {orders: newOrder._id}})
-    if(updateRoom) res.status(200).json({ message: "Success"})
+
+    var updateRoom = Room.findById(idRoom)
+    updateRoom.orders.push(newOrder._id)
+    const saveRoom = updateRoom.save()
+    if(saveRoom) res.status(200).json({ message: "Success"})
 }
 
 const getAllOrdersInRoom = async(req,res) => {
