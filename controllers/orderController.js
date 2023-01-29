@@ -16,7 +16,7 @@ async function createOrder(req, res){
 }
 
 const getAllOrdersInRoom = async(req,res) => {
-    const id = req.idRoom
+    const id = req.params.idRoom
     try{
         const orders = await Room.find({_id: id}).populate('orders')
         res.status(200).json({message: 'Success',data:orders})
@@ -26,7 +26,7 @@ const getAllOrdersInRoom = async(req,res) => {
     }
 }
 const getAllOrdersForUser = async(req,res) => {
-    const id = req.idRoom
+    const id = req.params.idRoom
     const idUser = req.userData.id
     try{
         const orders = await Room.find({_id: id, members: idUser}).populate('orders')
@@ -38,7 +38,7 @@ const getAllOrdersForUser = async(req,res) => {
 }
 
 const deleteOrder = async(req,res) => {
-    const id = req.body.id
+    const id = req.params.idOrder
     try{
         await Order.deleteOne({_id: id})
         res.status(200).json({message: 'Success'})

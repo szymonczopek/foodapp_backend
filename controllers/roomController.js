@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 async function createRoom(req, res){
     const user = req.userData.id
-    const {name, description,members} = req.body
+    const {name, description, members} = req.body
     
     const room= await new Room({
         name: name,
@@ -46,7 +46,7 @@ const getAll = async(req,res) => {
     }
 }
 const deleteRoom = async(req,res) => {
-    const id = req.body.id
+    const id = req.params.id
     try{
         await Room.deleteOne({_id: id})
         res.status(200).json({message: 'Success'})
@@ -57,7 +57,7 @@ const deleteRoom = async(req,res) => {
 }
 const addMembers = async(req, res) =>{
     const members = req.body.members
-    const idRoom = req.body.idRoom
+    const idRoom = req.params.idRoom
 
     try{
     members.forEach(member => {

@@ -12,7 +12,7 @@ const getAll = async(req,res) => {
 }
 
 const reveiveNotification = async(req, res) =>{
-    const id = req.body.idNotification
+    const id = req.params.idNotification
     try{
         const noti= await Notification.findOne({_id: id})
         if(noti){
