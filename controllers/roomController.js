@@ -77,9 +77,9 @@ const addMembers = async(req, res) =>{
 }
 
 const getRoomInfo = async(req, res) =>{
-    const idRoom = req.body.idRoom
+    const idRoom = req.params.idRoom
      try{
-        const room = await Room.findOne({_id: idRoom}).populate('members').populate('oreders') 
+        const room = await Room.findOne({_id: idRoom}).populate('members','login img').populate('orders') 
         res.status(200).json({message: 'Success',data:room})
     } catch(err){
         console.log(err)

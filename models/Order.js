@@ -14,7 +14,7 @@ const orderSchema = mongoose.Schema({
     },
     orderItems: {
         type: mongoose.Types.ObjectId,
-        ref: 'orderItem'
+        ref: 'OrderItem'
     },
     owner: {
         type: mongoose.Types.ObjectId,
@@ -22,7 +22,8 @@ const orderSchema = mongoose.Schema({
         require: true 
     },
     totalCost: {
-        type: number
+        type: Number,
+        default:0
     }
 })
 
