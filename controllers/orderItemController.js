@@ -11,7 +11,7 @@ const newOrderItem= await new OrderItem({
         cost: cost,
         amount: amount    
     }).save();
-    
+
     var updateOrder = Order.findById(idOrder)
     updateOrder.orderItems.push(newOrderItem._id)
     const saveOrder = updateOrder.save()
@@ -29,7 +29,7 @@ const getAllItemOrdersInOrder = async(req,res) => {
         res.status(500).json({message: 'Problem with fetching data'})
     }
 }
-module.exports({
+module.exports = {
     createOrderItem,
     getAllItemOrdersInOrder
-})
+}
