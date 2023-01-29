@@ -55,9 +55,42 @@ const deleteRoom = async(req,res) => {
         res.status(500).json({message: 'Problem with fetching data'})
     }
 }
+const addMembers = async(req, res) =>{
+    const members = req.body.members
+    const idRoom = req.body.idRoom
+
+    try{
+    members.forEach(member => {
+        const user= User.findOne({_id:member.id});
+        if(user){
+            const updateMembers = Room.findOneAndUpdate({_id:idRoom},{$push: {members: user._id}})
+        }
+        else{
+            res.status(500).json({message: "User " + member.name + " doesn't exist"})
+        }
+    });
+    res.status(200).json({message: 'Success'})
+} catch{
+    console.log(err)
+    res.status(500).json({message: 'Problem with adding members'})
+}
+}
+
+const getRoomInfo = async(req, res) =>{
+    const idRoom = req.body.idRoom
+     try{
+        const room = await Room.findOne({_id: idRoom}).populate('members').populate('oreders') 
+        res.status(200).json({message: 'Success',data:room})
+    } catch(err){
+        console.log(err)
+        res.status(500).json({message: 'Problem with fetching data'})
+    }
+}
 
 module.exports =({
     createRoom,
     getAll,
-    deleteRoom
+    deleteRoom,
+    addMembers,
+    getRoomInfo
 })
