@@ -16,7 +16,7 @@ async function createOrder(req, res){
     var updateRoom = await Room.findById(idRoom)
     updateRoom.orders.push(newOrder._id)
     const saveRoom = updateRoom.save()
-    if(saveRoom) res.status(200).json({ message: "Success"})
+    if(saveRoom) res.status(200).json({ message: "Success",data:newOrder})
     else res.status(400).json({message:'Creating order failed'})
 }
 

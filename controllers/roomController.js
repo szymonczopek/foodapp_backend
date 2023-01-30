@@ -5,45 +5,48 @@ const User = require('../models/User');
 async function createRoom(req, res){
     const user = req.userData.id
     const {name, description, members} = req.body
+    try{
+        const room= await new Room({
+            name: name,
+            description: description,
+            owner: user,
+            members: [user,...members]
+        }).save();
+        if(room){
+            //add room to user list
     
-    const room= await new Room({
-        name: name,
-        description: description,
-        owner: user,
-        members: [user,...members]
-    }).save();
-    if(room){
-        //add room to use list
-
-        var userData = await User.findById(user)
-        userData.rooms.push(room._id)
-        const updateUser = userData.save()
-
-        members.forEach(member => {
-            const user= User.findOne({_id:member.id});
-            if(user){
-                var updateMembers = Room.findById(idRoom)
-                updateMembers.members.push(member)
-                var updateMembersRooms = User.findById(member.id)
-                updateMembersRooms.rooms.push(updateMembers)
-                }
-           });
-        
-
-        if(updateUser)
-            res.status(200).json({
-                message: "Success",
-                data: {
-                    name: room.name,
-                    members: room.members,
-                    _id: room._id
-                }
-            })
-        else
-            res.status(500).json({message: 'Adding room failed'})
-    } else{
-        res.status(500).json({message: 'Creating room failed'})
+            var userData = await User.findById(user)
+            userData.rooms.push(room._id)
+            const updateUser = userData.save()
+    
+            members.forEach(async member => {
+                const updatedMember= await User.findById(member);
+                if(updatedMember){
+                    //console.log('room',updatedMember)
+                    updatedMember.rooms.push(room._id)
+                    updatedMember.save()
+                    }
+               });
+            
+    
+            if(updateUser)
+                res.status(200).json({
+                    message: "Success",
+                    data: {
+                        name: room.name,
+                        members: room.members,
+                        _id: room._id
+                    }
+                })
+            else
+                res.status(500).json({message: 'Adding room failed'})
+        } else{
+            res.status(500).json({message: 'Creating room failed'})
+        }
+    } catch(err){
+        res.status(500).json({message:'Server error'})
     }
+    
 }
 
 const getAll = async(req,res) => {
@@ -91,7 +94,7 @@ const addMembers = async(req, res) =>{
 const getRoomInfo = async(req, res) =>{
     const idRoom = req.params.idRoom
      try{
-        const room = await Room.findOne({_id: idRoom}).populate('members','login img').populate('orders') 
+        const room = await Room.findOne({_id: idRoom}).populate('members','login img').populate('orders').populate('owner','login') 
         res.status(200).json({message: 'Success',data:room})
     } catch(err){
         console.log(err)
