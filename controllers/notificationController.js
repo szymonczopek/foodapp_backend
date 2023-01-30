@@ -69,10 +69,20 @@ const getNewInvitations = async(req, res) =>{
         res.status(500).json({message: "Problem with fetching new invitations"})
     }
 }
+const getAllPushForUser = async(req, res) =>{
+    const idUser= req.userData.id
+    try{
+        const notifications= await Notification.find({receiver: idUser, type: 'Push'})
+        res.status(200).json({message: "Success", data: notifications})
+    } catch{
+        res.status(500).json({message: "Problem with fetching push notifications"})
+    } 
+}
 module.exports = {
     getAll,
     reveiveNotification,
     pushNotification,
     getNewNotifications,
-    getNewInvitations
+    getNewInvitations,
+    getAllPushForUser
 }

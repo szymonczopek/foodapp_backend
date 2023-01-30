@@ -63,13 +63,12 @@ const addMembers = async(req, res) =>{
     members.forEach(member => {
         const user= User.findOne({_id:member.id});
         if(user){
-            const updateMembers = Room.findOneAndUpdate({_id:idRoom},{$push: {members: user._id}})
-        }
-        else{
-            res.status(500).json({message: "User " + member.name + " doesn't exist"})
-        }
-    });
-    res.status(200).json({message: 'Success'})
+            var updateMembers = Room.findById(idRoom)
+            updateMembers.members.push(member)
+            }
+       });
+       const saveMembers = updateMembers.save()
+    if(saveMembers) res.status(200).json({message: 'Success'})
 } catch{
     console.log(err)
     res.status(500).json({message: 'Problem with adding members'})
@@ -79,7 +78,7 @@ const addMembers = async(req, res) =>{
 const getRoomInfo = async(req, res) =>{
     const idRoom = req.params.idRoom
      try{
-        const room = await Room.findOne({_id: idRoom}).populate('owner','login').populate('members','login img').populate('orders','name owner totalCost orderItems') 
+        const room = await Room.findOne({_id: idRoom}).populate('members','login img').populate('orders') 
         res.status(200).json({message: 'Success',data:room})
     } catch(err){
         console.log(err)

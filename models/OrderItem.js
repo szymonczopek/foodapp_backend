@@ -13,7 +13,16 @@ const orderItemSchema = mongoose.Schema({
     },
     amount: {
         type: Number
-    }
+    },
+    totalCost: {
+        type: Number,
+        default:0
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        require: true 
+    },
 })
 
 module.exports = mongoose.model('OrderItem',orderItemSchema)

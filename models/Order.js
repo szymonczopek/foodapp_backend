@@ -21,6 +21,11 @@ const orderSchema = mongoose.Schema({
         ref: 'User',
         require: true 
     },
+    members: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }],
+
     totalCost: {
         type: Number,
         default:0
