@@ -55,7 +55,7 @@ const deleteOrder = async(req,res) => {
 const getOrder = async(req, res) =>{
     const idOrder = req.params.idOrder
     try{
-        const ord = await Order.findOne({_id: id}).populate('orderItems')
+        const ord = await Order.findOne({_id: idOrder}).populate('orderItems')
         if(ord) res.status(200).json({message: 'Success',data: ord})
     } catch{
         console.log(err)
@@ -63,7 +63,7 @@ const getOrder = async(req, res) =>{
     }
 }
 
-const addMembersOrder = 
+
 module.exports={
     createOrder,
     getAllOrdersInRoom,
