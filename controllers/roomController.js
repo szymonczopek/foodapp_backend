@@ -19,6 +19,17 @@ async function createRoom(req, res){
         userData.rooms.push(room._id)
         const updateUser = userData.save()
 
+        members.forEach(member => {
+            const user= User.findOne({_id:member.id});
+            if(user){
+                var updateMembers = Room.findById(idRoom)
+                updateMembers.members.push(member)
+                var updateMembersRooms = User.findById(member.id)
+                updateMembersRooms.rooms.push(updateMembers)
+                }
+           });
+        
+
         if(updateUser)
             res.status(200).json({
                 message: "Success",
@@ -65,10 +76,12 @@ const addMembers = async(req, res) =>{
         if(user){
             var updateMembers = Room.findById(idRoom)
             updateMembers.members.push(member)
+            var updateMembersRooms = User.findById(member.id)
+            updateMembersRooms.rooms.push(updateMembers)
             }
        });
        const saveMembers = updateMembers.save()
-    if(saveMembers) res.status(200).json({message: 'Success'})
+    if(saveMembers && saveMembersRooms) res.status(200).json({message: 'Success'})
 } catch{
     console.log(err)
     res.status(500).json({message: 'Problem with adding members'})
