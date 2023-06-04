@@ -6,12 +6,12 @@ Mobile app backend for splitting the restaurant bill. Create a room to which peo
 
 ### 1. Make sure you have the following tools installed on your computer:</br>
 
-NodeJS
-MongoDB
+NodeJS</br>
+MongoDB</br>
 
 ### 2. Download the code from GitHub:</br>
 
-Using Git repository, you can use this command:
+Using Git repository, you can use this command:</br>
 
     git clone https://github.com/szymonczopek/foodapp_backend.git
     
@@ -27,11 +27,12 @@ Copy the .env.example file and rename it as .env. You can do this by running the
 
     cp .env.example .env
 
-Check the project's configuration file (e.g., `config.js` or `database.js`) to find the MongoDB database configuration details. Make sure you have MongoDB installed on your computer. You can download and install MongoDB from the official website at `https://www.mongodb.com`.
+Check the project's configuration file (e.g., `config.js` or `database.js`) to find the MongoDB database configuration details. Make sure you have MongoDB installed on your computer. You can download and install MongoDB from the official website at `https://www.mongodb.com`.</br>
 
 ### 5. Start the application:</br>
 
-Run the npm start command to start the application.
+Run the npm start command to start the application.</br>
 
     npm start
+    
 The application should now be running, and the server is listening on a specific port (usually 3000 or another port specified in the configuration file). You can open a web browser and navigate to `http://localhost:3000` (or the specified port) to see the running application.
