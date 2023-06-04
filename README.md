@@ -7,7 +7,7 @@ Mobile app backend for splitting the restaurant bill. Create a room to which peo
 ### 1. Make sure you have the following tools installed on your computer:</br>
 
 NodeJS</br>
-MongoDB</br>
+Database MongoDB</br>
 
 ### 2. Download the code from GitHub:</br>
 
