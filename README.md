@@ -22,6 +22,10 @@ In the project directory, run the following command to install all the required 
     
 ### 4. Configure the MongoDB database:</br>
 
+Copy the .env.example file and rename it as .env. You can do this by running the following Bash command:</br>
+
+    cp .env.example .env
+
 Check the project's configuration file (e.g., `config.js` or `database.js`) to find the MongoDB database configuration details. Make sure you have MongoDB installed on your computer. You can download and install MongoDB from the official website at `https://www.mongodb.com`.
 
 ### 5. Start the application:</br>
