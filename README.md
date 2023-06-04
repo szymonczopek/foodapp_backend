@@ -27,7 +27,7 @@ Copy the .env.example file and rename it as .env. You can do this by running the
 
     cp .env.example .env
 
-Check the project's configuration file (e.g., `config.js` or `database.js`) to find the MongoDB database configuration details. Make sure you have MongoDB installed on your computer. You can download and install MongoDB from the official website at `https://www.mongodb.com`.</br>
+Check the project's configuration file (e.g., `config.js` or `database.js`) to find the MongoDB database configuration details.</br>
 
 ### 5. Start the application:</br>
 
