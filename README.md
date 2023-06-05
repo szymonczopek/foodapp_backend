@@ -33,6 +33,6 @@ Check the project's configuration file (e.g., `config.js` or `database.js`) to f
 
 Run the npm start command to start the application.</br>
 
-    npm start
+    npm devStart
     
 The application should now be running, and the server is listening on a specific port (usually 3000 or another port specified in the configuration file). You can open a web browser and navigate to `http://localhost:3000` (or the specified port) to see the running application.
